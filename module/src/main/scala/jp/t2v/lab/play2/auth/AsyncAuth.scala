@@ -4,7 +4,7 @@ import play.api.mvc._
 import play.api.libs.iteratee.{Iteratee, Done}
 import scala.concurrent.{ExecutionContext, Future}
 
-trait AsyncAuth extends CookieSupport {
+trait AsyncAuth extends AbstractAuthSupport {
     self: AuthConfig with Controller =>
 
   def authorized(authority: Authority)(implicit request: RequestHeader, context: ExecutionContext): Future[Either[Result, (User, CookieUpdater)]] = {

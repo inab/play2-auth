@@ -1,6 +1,7 @@
 package controllers.builder
 
 import jp.t2v.lab.play2.auth.AuthActionBuilders
+import jp.t2v.lab.play2.auth.CookieSupport
 import jp.t2v.lab.play2.auth.sample.Account
 import jp.t2v.lab.play2.auth.sample.Role._
 import play.api.mvc._
@@ -21,7 +22,7 @@ object TransactionalAction extends ActionBuilder[TransactionalRequest] {
   }
 }
 
-trait Messages extends Controller with AuthActionBuilders with AuthConfigImpl {
+trait Messages extends Controller with AuthActionBuilders with AuthConfigImpl with CookieSupport {
 
   type AuthTxRequest[A] = GenericAuthRequest[A, TransactionalRequest]
   final def AuthorizationTxAction(authority: Authority): ActionBuilder[AuthTxRequest] = composeAuthorizationAction(TransactionalAction)(authority)

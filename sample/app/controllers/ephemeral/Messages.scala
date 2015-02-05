@@ -2,11 +2,12 @@ package controllers.ephemeral
 
 import controllers.stack.Pjax
 import jp.t2v.lab.play2.auth.AuthElement
+import jp.t2v.lab.play2.auth.CookieSupport
 import play.api.mvc.Controller
 import views.html
 import jp.t2v.lab.play2.auth.sample.Role._
 
-trait Messages extends Controller with Pjax with AuthElement with AuthConfigImpl {
+trait Messages extends Controller with Pjax with AuthElement with AuthConfigImpl with CookieSupport {
 
   def main = StackAction(AuthorityKey -> NormalUser) { implicit request =>
     val title = "message main"

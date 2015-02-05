@@ -1,6 +1,7 @@
 package controllers.csrf
 
 import jp.t2v.lab.play2.auth.LoginLogout
+import jp.t2v.lab.play2.auth.CookieSupport
 import jp.t2v.lab.play2.auth.sample.Account
 import play.api.data.Form
 import play.api.data.Forms._
@@ -10,7 +11,7 @@ import views.html
 import scala.concurrent.Future
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
-object Sessions  extends Controller with LoginLogout with AuthConfigImpl {
+object Sessions  extends Controller with LoginLogout with CookieSupport with AuthConfigImpl {
 
   val loginForm = Form {
     mapping("email" -> email, "password" -> text)(Account.authenticate)(_.map(u => (u.email, "")))

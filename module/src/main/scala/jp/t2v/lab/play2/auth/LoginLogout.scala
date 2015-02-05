@@ -5,7 +5,7 @@ import play.api.mvc.Cookie
 import play.api.libs.Crypto
 import scala.concurrent.{Future, ExecutionContext}
 
-trait LoginLogout extends CookieSupport {
+trait LoginLogout extends AbstractAuthSupport {
   self: Controller with AuthConfig =>
 
   def gotoLoginSucceeded(userId: Id)(implicit request: RequestHeader, ctx: ExecutionContext): Future[Result] = {

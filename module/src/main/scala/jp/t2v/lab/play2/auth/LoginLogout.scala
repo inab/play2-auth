@@ -22,7 +22,7 @@ trait LoginLogout extends CookieSupport {
   }
 
   def gotoLogoutSucceeded(result: => Future[Result])(implicit request: RequestHeader, ctx: ExecutionContext): Future[Result] = {
-    request.cookies.get(cookieName) map(x => x.value ) flatMap verifyHmac foreach idContainer.remove
+    unbakeCookie(request) foreach idContainer.remove
     result.map(_.discardingCookies(DiscardingCookie(cookieName)))
   }
 }

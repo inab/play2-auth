@@ -1,7 +1,7 @@
 package jp.t2v.lab.play2.auth
 
 import play.api.libs.Crypto
-import play.api.mvc.{Result, Cookie}
+import play.api.mvc.{Result, RequestHeader, Cookie}
 
 trait CookieSupport extends AbstractAuthSupport { self: AuthConfig =>
 
@@ -11,5 +11,13 @@ trait CookieSupport extends AbstractAuthSupport { self: AuthConfig =>
     result.withCookies(Cookie(cookieName, value, maxAge, cookiePathOption, cookieDomainOption, cookieSecureOption, cookieHttpOnlyOption))
   }
 
+  override def unbakeCookieInternal(request: RequestHeader): Option[String] = {
+	  val cookie = request.cookies.get(cookieName)
+	  if(cookie.isDefined) {
+		  Some(cookie.get.value)
+	  } else {
+		  None
+	  }
+  }
 }
 

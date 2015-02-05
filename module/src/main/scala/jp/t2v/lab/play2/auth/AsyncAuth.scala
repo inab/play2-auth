@@ -25,7 +25,7 @@ trait AsyncAuth extends CookieSupport {
   private[auth] def restoreUser(implicit request: RequestHeader, context: ExecutionContext): Future[(Option[User], CookieUpdater)] = {
     (for {
       cookie <- request.cookies.get(cookieName)
-      token  <- verifyHmac(cookie)
+      token  <- verifyHmac(cookie.value)
     } yield for {
       Some(userId) <- idContainer.get(token)
       Some(user)   <- resolveUser(userId)

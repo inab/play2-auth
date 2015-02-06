@@ -12,6 +12,14 @@ GET     /basic/messages/list               controllers.basic.Messages.list
 GET     /basic/messages/detail/:id         controllers.basic.Messages.detail(id: Int)
 GET     /basic/messages/write              controllers.basic.Messages.write
 
+GET     /basic_token/                      controllers.basic_token.Sessions.login
+POST    /basic_token/login                 controllers.basic_token.Sessions.authenticate
+GET     /basic_token/logout                controllers.basic_token.Sessions.logout
+
+GET     /basic_token/messages/main               controllers.basic_token.Messages.main
+GET     /basic_token/messages/list               controllers.basic_token.Messages.list
+GET     /basic_token/messages/detail/:id         controllers.basic_token.Messages.detail(id: Int)
+GET     /basic_token/messages/write              controllers.basic_token.Messages.write
 # Builder
 GET     /builder/                          controllers.builder.Sessions.login
 POST    /builder/login                     controllers.builder.Sessions.authenticate
